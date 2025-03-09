@@ -6,7 +6,6 @@
     <title>User Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* General Styles */
         body, html {
             margin: 0;
             padding: 0;
@@ -21,7 +20,6 @@
             animation: fadeIn 1.5s ease-in-out;
         }
 
-        /* Profile Header */
         .profile-header {
             display: flex;
             align-items: center;
@@ -60,12 +58,12 @@
         }
 
         .profile-header .left p .rating {
-            margin-right: 5px; /* Space between the rating number and the star */
+            margin-right: 5px;
         }
 
         .profile-header .left p .star {
-            color: #FFD700; /* Gold color for the star */
-            font-size: 16px; /* Size of the star */
+            color: #FFD700;
+            font-size: 16px;
         }
 
         .profile-header .right button {
@@ -84,7 +82,6 @@
             background-color: #80e8e5;
         }
 
-        /* Section Titles */
         .section-title {
             margin: 20px 0;
             font-size: 18px;
@@ -93,7 +90,6 @@
             animation: fadeIn 1s ease-in-out;
         }
 
-        /* Section Containers */
         .section {
             background-color: white;
             padding: 20px;
@@ -103,7 +99,6 @@
             animation: fadeInUp 1s ease-out;
         }
 
-        /* Section Items */
         .section .item {
             display: flex;
             justify-content: space-between;
@@ -123,7 +118,6 @@
             margin-bottom: 10px;
         }
 
-        /* Modern Edit Button */
         .edit-btn {
             background-color: #80e8e5;
             color: white;
@@ -143,14 +137,12 @@
             outline: none;
         }
 
-        /* Icons */
         .icon {
             margin-right: 10px;
             font-size: 18px;
             color: #4aa8ba;
         }
 
-        /* Navbar */
         .nav-bar {
             display: flex;
             justify-content: space-around;
@@ -168,7 +160,6 @@
             font-size: 16px;
         }
 
-        /* "Return to Map" Button */
         .return-to-map-btn {
             background-color: #4aa8ba;
             color: white;
@@ -190,9 +181,8 @@
             outline: none;
         }
 
-        /* Update for Log Out button */
         .edit-btn.logout-btn {
-            background-color: #4DB6AC; /* Updated color */
+            background-color: #4DB6AC;
             color: white;
             font-size: 14px;
             padding: 10px 20px;
@@ -205,16 +195,15 @@
         }
 
         .edit-btn.logout-btn:hover {
-            background-color: #80e8e5; /* Lighter color on hover */
+            background-color: #80e8e5;
         }
 
         .edit-btn.logout-btn:focus {
             outline: none;
         }
 
-        /* Update for Delete Account button */
         .delete-account-btn {
-            background-color: #E57373; /* Color change */
+            background-color: #E57373;
             color: white;
             font-size: 14px;
             padding: 10px 20px;
@@ -227,14 +216,13 @@
         }
 
         .delete-account-btn:hover {
-            background-color: #EF9A9A; /* Lighter color on hover */
+            background-color: #EF9A9A;
         }
 
         .delete-account-btn:focus {
             outline: none;
         }
 
-        /* Animations */
         @keyframes fadeIn {
             0% {
                 opacity: 0;
@@ -281,7 +269,6 @@
 <body>
 
     <div class="container">
-        <!-- Profile Header -->
         <div class="profile-header">
             <div class="left">
                 <img src="assets/f.jpg" alt="Avatar">
@@ -295,7 +282,6 @@
             </div>
         </div>
 
-        <!-- Personal Info Section -->
         <div class="section">
             <div class="section-title"><i class="fas fa-user icon"></i>Personal Info</div>
             <div class="item">
@@ -315,7 +301,6 @@
             </div>
         </div>
 
-        <!-- Trip Safety Section -->
         <div class="section">
             <div class="section-title"><i class="fas fa-shield-alt icon"></i>Trip Safety</div>
             <div class="item">
@@ -329,7 +314,6 @@
             </div>
         </div>
 
-        <!-- Saved Places Section -->
         <div class="section">
             <div class="section-title"><i class="fas fa-map-marker-alt icon"></i>Saved Places</div>
             <div class="item">
@@ -344,22 +328,19 @@
             </div>
         </div>
 
-        <!-- Log Out and Delete Account -->
         <div class="section">
             <div class="section-title"><i class="fas fa-lock icon"></i>Account Actions</div>
             <div class="item">
-                <button class="edit-btn logout-btn">Log Out</button> <!-- Updated button class -->
+                <button class="edit-btn logout-btn">Log Out</button>
             </div>
             <div class="item">
                 <button class="delete-account-btn">Delete Account</button>
             </div>
         </div>
 
-        <!-- Return to Map Button -->
         <button class="return-to-map-btn" onclick="window.location.href='index.html'">Return to Map</button>
     </div>
 
-    <!-- Bottom Navbar -->
     <div class="nav-bar">
         <a href="startpage.html">Home</a>
         <a href="rides.html">Rides</a>

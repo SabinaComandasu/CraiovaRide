@@ -18,9 +18,9 @@
         .popup-content {
             text-align: center;
             min-width: 300px;
-            max-height: 120px; /* Increased height to handle more content */
+            max-height: 120px;
             padding: 5px 10px;
-            overflow-y: auto; /* Allow scrolling for long addresses */
+            overflow-y: auto;
         }
         .popup-buttons {
             display: flex;
@@ -100,7 +100,6 @@
 
             var marker = L.marker([lat, lon]).addTo(map);
 
-            // Reverse geocoding using OpenStreetMap's Nominatim API
             var address = "Unknown Address";
             fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
                 .then(response => response.json())
@@ -109,9 +108,8 @@
                         address = data.display_name;
                     }
 
-                    // Truncate address if it is too long
                     if (address.length > 100) {
-                        address = address.substring(0, 100) + '...'; // Truncate to 100 characters
+                        address = address.substring(0, 100) + '...';
                     }
 
                     var popupContent = `
@@ -133,7 +131,6 @@
             marker.closePopup();
             document.getElementById("rideModal").style.display = "block";
 
-            // Pass the address, lat, and lon to the ride details page
             document.getElementById("showRideDetailsBtn").onclick = function () {
                 window.location.href = `rideDetails.html?lat=${lat}&lon=${lon}&address=${encodeURIComponent(address)}`;
             };

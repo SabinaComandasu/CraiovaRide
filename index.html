@@ -6,7 +6,6 @@
     <title>Ride App</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-
         body, html {
             margin: 0;
             padding: 0;
@@ -14,15 +13,11 @@
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            background-image: url('assets/craiova.jpg'); 
-            background-size: cover; /* Make sure the background image covers the entire screen */
-    background-position: center; /* Center the background image */
-    background-attachment: fixed;
         }
 
         #map {
             position: fixed;
-            top: 57px;  
+            top: 57px;
             left: 0;
             width: 100%;
             height: 100%;
@@ -34,69 +29,63 @@
 
         .logo {
             position: fixed;
-            top: 0px;  
-            left: 0px;  
-            width: 150px; 
-            height: 135px; /* Reduced the height of the logo panel */
-            background-color: white; 
-            padding: -20px 10px -5px -10px; 
-            z-index: 1001; 
+            top: 0px;
+            left: 0px;
+            width: 150px;
+            height: 135px;
+            background-color: white;
+            padding: -20px 10px -5px -10px;
+            z-index: 1001;
             border-radius: 10px;
             border: 3px solid #bcf7f5;
-            border-width: 6px; 
+            border-width: 6px;
         }
 
-        /* Hover and click animations for logo */
         .logo img {
-            width: 100%; /* Ensure the image fits within the container */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
-            cursor: pointer; /* Change the mouse cursor to pointer */
+            width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
 
-        /* Hover animation for the image */
         .logo img:hover {
-            transform: scale(1.05); /* Slightly enlarge the logo */
-            box-shadow: 0 0 15px rgba(128, 232, 229, 0.7); /* Glow effect */
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(128, 232, 229, 0.7);
         }
 
-        /* Click animation for the image */
         .logo img:active {
-            transform: scale(0.95); /* Slightly shrink the logo when clicked */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Slight shadow on click */
+            transform: scale(0.95);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
 
-        /* Avatar styling */
         .avatar {
             position: fixed;
-            top: 4px; /* Distance from the top */
-            right: 8px; /* Distance from the right */
-            width: 45px; /* Size of the avatar */
-            height: 45px; /* Ensure it is a square */
-            border-radius: 50%; /* Make the image circular */
-            border: 3px solid darkslategray; /* Optional: Add a white border around the avatar */
-            z-index: 1001; 
-            transition: transform 0.1s ease, box-shadow 0.1s ease; /* Smooth transition for clicking */
-            cursor: pointer; /* Change the cursor to a pointer on hover */
+            top: 4px;
+            right: 8px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 3px solid darkslategray;
+            z-index: 1001;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            cursor: pointer;
         }
 
-        /* Avatar click animation */
         .avatar:active {
-            transform: scale(0.9); /* Shrink the avatar slightly on click */
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Optional: Add a subtle glow effect when clicked */
+            transform: scale(0.9);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Search bar styling */
         .search-bar {
             padding: 10px;
             display: flex;
             gap: 10px;
             justify-content: center;
             position: fixed;
-            top: 0; /* Position at the top */
-            left: 816px; /* Position at the middle horizontally */
-            transform: translateX(-50%); /* Shift it back by half its own width to truly center it */
-            width: 1290px; /* Your specified width */
-            background: #4aa8ba; /* Updated color */
+            top: 0;
+            left: 816px;
+            transform: translateX(-50%);
+            width: 1290px;
+            background: #4aa8ba;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             z-index: 10;
@@ -110,41 +99,36 @@
             outline: none;
         }
 
-        /* Button Styles */
         button {
             padding: 10px;
             font-size: 16px;
             cursor: pointer;
             border: none;
-            background: #80e8e5; /* Default background color */
+            background: #80e8e5;
             color: white;
             border-radius: 5px;
             border: 3px solid #bcf7f5;
-            transition: background-color 0.3s ease, transform 0.2s ease; /* Transition effect */
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
-        /* Button Hover Effect */
         button:hover {
-            background-color: #4aa8ba; /* Change background color on hover */
-            transform: scale(1.05); /* Slightly enlarge the button */
+            background-color: #4aa8ba;
+            transform: scale(1.05);
         }
 
-        /* Button Click Effect */
         button:active {
-            background-color: #2c8c87; /* Darker background color on click */
-            transform: scale(0.95); /* Slightly shrink the button when clicked */
+            background-color: #2c8c87;
+            transform: scale(0.95);
         }
 
-        /* Schedule button inside the search bar */
         .schedule-btn {
             position: absolute;
-            right: 5px; /* Adjusted to move the button left */
+            right: 5px;
             top: 50%;
-            transform: translateY(-50%); /* Center button vertically within the search bar */
+            transform: translateY(-50%);
             z-index: 1001;
         }
 
-        /* Navbar fixed at the bottom */
         .nav-bar {
             display: flex;
             justify-content: space-around;
@@ -162,30 +146,26 @@
             font-size: 16px;
         }
         .nav-bar a:hover {
-            color: #80e8e5; /* Change color on hover */
-            transform: scale(1.1); /* Slightly enlarge the link when hovered */
+            color: #80e8e5;
+            transform: scale(1.1);
         }
 
-        /* Click effect */
         .nav-bar a:active {
-            transform: scale(0.95); /* Shrink the link slightly when clicked */
+            transform: scale(0.95);
         }
 
         input::placeholder {
-            color: gray; /* Set the placeholder text color to white */
+            color: gray;
         }
     </style>
 </head>
 <body>
-    <!-- Logo in the top-left corner with a click event to redirect to startpage.html -->
     <div class="logo" onclick="window.location.href='startpage.html';">
         <img src="assets/logo.png" alt="Logo">
     </div>
 
-    <!-- Avatar in the top-right corner -->
     <img src="assets/avatar.png" alt="User Avatar" class="avatar" onclick="window.location.href='profile.html';">
 
-    <!-- Search Bar -->
     <div class="search-bar">
         <input type="text" id="search-input" placeholder="Enter address...">
         <div class="schedule-btn">
@@ -193,10 +173,8 @@
         </div>
     </div>
 
-    <!-- Map container -->
     <div id="map"></div>
 
-    <!-- Navbar -->
     <div class="nav-bar">
         <a href="startpage.html">Home</a>
         <a href="rides.html">Rides</a>
@@ -205,27 +183,22 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        var map = L.map('map').setView([44.3186, 23.7994], 13); // Default location (Craiova, Romania)
+        var map = L.map('map').setView([44.3186, 23.7994], 13);
         
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // Function to handle the address search
         document.getElementById('search-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 var address = e.target.value;
 
-                // Call the Nominatim API to geocode the address
                 fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
                     .then(response => response.json())
                     .then(data => {
                         if (data && data.length > 0) {
-                            // Get the first result from the search
                             var lat = parseFloat(data[0].lat);
                             var lon = parseFloat(data[0].lon);
-                            
-                            // Redirect to a similar map page with the coordinates
                             window.location.href = `map.html?lat=${lat}&lon=${lon}`;
                         } else {
                             alert("Address not found!");
@@ -238,25 +211,20 @@
             }
         });
 
-        // Optionally, allow dragging the map to log new coordinates
         map.on('dragend', function() {
             console.log('Map moved to:', map.getCenter());
         });
 
-        // Schedule button function
         function scheduleRide() {
             var address = document.getElementById('search-input').value;
 
             if (address) {
-                // Same geocoding process for scheduling
                 fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
                     .then(response => response.json())
                     .then(data => {
                         if (data && data.length > 0) {
                             var lat = parseFloat(data[0].lat);
                             var lon = parseFloat(data[0].lon);
-                            
-                            // Redirect to map page with lat/lon
                             window.location.href = `map.html?lat=${lat}&lon=${lon}`;
                         } else {
                             alert("Address not found!");

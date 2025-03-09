@@ -13,7 +13,7 @@
             background-color: #daf6f7;
         }
 
-        /* Container Styling */
+   
         .container {
             width: 100%;
             max-width: 900px;
@@ -23,7 +23,7 @@
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             animation: fadeIn 1s ease-in-out;
-            border-top: 10px solid #00bcd4; /* Accent color for the top border */
+            border-top: 10px solid #00bcd4; 
         }
 
         .header {
@@ -39,7 +39,7 @@
 
         .rating-criteria {
     margin-bottom: 35px;
-    padding: 25px 0px 0px 35px; /* Increased padding-top to push content down */
+    padding: 25px 0px 0px 35px;
     background-color: #f9f9f9;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -48,7 +48,7 @@
 .rating-criteria h3 {
     font-size: 20px;
     color: #00bcd4;
-    line-height: 1.4; /* Adjust line-height to give extra space */
+    line-height: 1.4;
 }
 
 
@@ -58,7 +58,7 @@
             position: relative;
         }
 
-        /* Positioning the numbers on top of each star */
+
         .rating-stars label {
             position: relative;
             font-size: 30px;
@@ -69,7 +69,7 @@
         .rating-stars label::before {
             content: attr(data-number);
             position: absolute;
-            top: -25px; /* Space above the stars */
+            top: -25px; 
             left: 50%;
             transform: translateX(-50%);
             font-size: 16px;
@@ -120,8 +120,6 @@
             display: none;
         }
 
-        /* Popup Styling */
-        /* Popup Styling */
 .popup {
     display: none;
     position: fixed;
@@ -137,10 +135,10 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     opacity: 0;
     transition: opacity 0.5s ease;
-    animation: bubble 0.6s ease-out; /* Apply bubble animation */
+    animation: bubble 0.6s ease-out; 
 }
 
-/* Bubbly Animation */
+
 @keyframes bubble {
     0% {
         transform: translate(-50%, -50%) scale(0);
@@ -156,7 +154,7 @@
 }
 
 
-        /* Animation Definitions */
+      
         @keyframes fadeIn {
             0% {
                 opacity: 0;
@@ -174,7 +172,7 @@
             <h1>Rate Your Driver</h1>
         </div>
 
-        <!-- Rating Criteria 1 -->
+       
         <div class="rating-criteria">
             <h3>1. Driver's punctuality:</h3>
             <div class="rating-stars">
@@ -186,7 +184,7 @@
             </div>
         </div>
 
-        <!-- Rating Criteria 2 -->
+      
         <div class="rating-criteria">
             <h3>2. Driver's driving skills:</h3>
             <div class="rating-stars">
@@ -198,7 +196,7 @@
             </div>
         </div>
 
-        <!-- Rating Criteria 3 -->
+    
         <div class="rating-criteria">
             <h3>3. Friendliness of the driver:</h3>
             <div class="rating-stars">
@@ -210,7 +208,7 @@
             </div>
         </div>
 
-        <!-- Rating Criteria 4 -->
+      
         <div class="rating-criteria">
             <h3>4. Vehicle cleanliness:</h3>
             <div class="rating-stars">
@@ -222,7 +220,7 @@
             </div>
         </div>
 
-        <!-- Rating Criteria 5 -->
+      
         <div class="rating-criteria">
             <h3>5. Comfort of the ride:</h3>
             <div class="rating-stars">
@@ -234,7 +232,7 @@
             </div>
         </div>
 
-        <!-- Rating Criteria 6 -->
+     
         <div class="rating-criteria">
             <h3>6. Driver's knowledge of the route:</h3>
             <div class="rating-stars">
@@ -246,7 +244,7 @@
             </div>
         </div>
 
-        <!-- Rating Criteria 7 -->
+   
         <div class="rating-criteria">
             <h3>7. Safety precautions:</h3>
             <div class="rating-stars">
@@ -258,7 +256,7 @@
             </div>
         </div>
 
-        <!-- Rating Criteria 8 -->
+      
         <div class="rating-criteria">
             <h3>8. Overall satisfaction:</h3>
             <div class="rating-stars">
@@ -270,49 +268,47 @@
             </div>
         </div>
 
-        <!-- Error message -->
         <div id="error-message" class="error-message">
             Please complete all rating fields before submitting.
         </div>
 
-        <!-- Submit Button -->
+     
         <button id="submit-btn" class="submit-btn" onclick="validateAndSubmit()">Submit Rating</button>
     </div>
 
-    <!-- Popup -->
+    
     <div id="popup" class="popup">
         <p>Thank you for your time!</p>
     </div>
 
     <script>
-        // Function to validate if all fields are filled
+
         function validateAndSubmit() {
             const allCompleted = checkAllFieldsCompleted();
             if (allCompleted) {
-                showPopup(); // Show popup and redirect
+                showPopup(); 
             } else {
-                document.getElementById('error-message').style.display = 'block'; // Show error message
+                document.getElementById('error-message').style.display = 'block'; 
             }
         }
 
-        // Check if all rating fields are filled
+  
         function checkAllFieldsCompleted() {
             let fields = document.querySelectorAll('input[type="radio"]:checked');
             const requiredFields = document.querySelectorAll('input[type="radio"]');
-            return fields.length === requiredFields.length / 5; // We expect 5 fields per rating section
+            return fields.length === requiredFields.length / 5; 
         }
 
-        // Show popup message and redirect
+       
         function showPopup() {
             const popup = document.getElementById('popup');
             popup.style.display = 'block';
             popup.style.opacity = 1;
             setTimeout(function() {
-                window.location.href = 'index.html'; // Redirect after 2 seconds
+                window.location.href = 'index.html'; 
             }, 2000);
         }
 
-        // Event listener to hide the error message once the user selects a radio button
         document.querySelectorAll('input[type="radio"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 if (checkAllFieldsCompleted()) {

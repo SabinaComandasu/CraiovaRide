@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bolt-Like Website</title>
     <style>
-        /* General Styles */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +22,6 @@
             color: inherit;
         }
 
-        /* Header Styles */
         header {
             display: flex;
             justify-content: space-between;
@@ -51,31 +49,27 @@
             margin-left: 20px;
         }
 
-        /* Navigation Link Styles */
         header nav ul li a {
             color: white;
             font-size: 16px;
             font-weight: 600;
             padding: 10px 20px;
             border-radius: 5px;
-            transition: all 0.3s ease-in-out; /* Transition for resizing and color change */
+            transition: all 0.3s ease-in-out;
         }
 
-        /* Hover Effect for Navigation Links */
         header nav ul li a:hover {
-            background-color: #e0f7fa; /* Lighter cyan background */
-            color: #4AA8BA; /* Change text color to the original cyan */
-            transform: scale(1.1); /* Grow slightly */
+            background-color: #e0f7fa;
+            color: #4AA8BA;
+            transform: scale(1.1);
         }
 
-        /* Active (Click) Effect for Navigation Links */
         header nav ul li a:active {
-            transform: scale(0.95); /* Shrink slightly when clicked */
-            background-color: #4AA8BA; /* Darker cyan background */
-            color: white; /* Change text to white */
+            transform: scale(0.95);
+            background-color: #4AA8BA;
+            color: white;
         }
 
-        /* Hero Section */
         .hero {
             background-image: url('assets/car.png');
             background-size: cover;
@@ -115,7 +109,6 @@
             animation: fadeIn 1.5s ease-in-out;
         }
 
-        /* CTA Button */
         .cta-btn {
             background-color: #ffffff;
             color: #4AA8BA;
@@ -137,7 +130,6 @@
             transform: scale(0.95);
         }
 
-        /* Features Section */
         .features {
             display: flex;
             justify-content: space-around;
@@ -173,7 +165,6 @@
             color: #666;
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 20px;
@@ -185,7 +176,6 @@
             font-size: 14px;
         }
 
-        /* Keyframes for animations */
         @keyframes slideInDown {
             0% {
                 transform: translateY(-100%);

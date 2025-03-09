@@ -6,7 +6,7 @@
     <title>Schedule a Ride</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     <style>
-        /* Global Styles */
+
         body, html {
             margin: 0;
             padding: 0;
@@ -16,15 +16,15 @@
             flex-direction: column;
             height: 100%;
             background-image: url('assets/uni.jpg'); 
-            background-size: cover; /* Make sure the background image covers the entire screen */
-    background-position: center; /* Center the background image */
+            background-size: cover; 
+    background-position: center; 
     background-attachment: fixed;
         }
 
-        /* Header */
+     
         .header {
             padding: 30px;
-            background-color: #4aa8ba; /* Light Blue Color */
+            background-color: #4aa8ba; 
             color: white;
             text-align: center;
             font-size: 24px;
@@ -36,7 +36,7 @@
             margin: 0;
         }
 
-        /* Calendar Container */
+     
         .calendar-container {
             display: flex;
             justify-content: center;
@@ -44,7 +44,7 @@
             flex-grow: 1;
             padding: 20px;
             animation: fadeInUp 1s ease-out;
-            gap: 20px; /* Add space between calendar and clock */
+            gap: 20px; 
         }
 
         .calendar {
@@ -58,7 +58,7 @@
             animation: zoomIn 1s ease-out;
         }
 
-        /* Time Picker Container */
+      
         .time-picker-container {
             width: 250px;
             padding: 30px;
@@ -86,7 +86,6 @@
             outline: none;
         }
 
-        /* Confirm Button */
         .confirm-btn {
             padding: 15px 30px;
             background-color: #007bff;
@@ -105,7 +104,6 @@
             transform: scale(1.05);
         }
 
-        /* Footer */
         .footer {
             position: fixed;
             bottom: 0;
@@ -122,7 +120,6 @@
             font-size: 14px;
         }
 
-        /* Animations */
         @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
@@ -161,12 +158,10 @@
             }
         }
 
-        /* Hidden content */
         .hidden {
             display: none;
         }
 
-        /* Display selected information */
         .selected-info {
             padding: 20px;
             background-color: #ffffff;
@@ -178,8 +173,8 @@
             margin: 0 auto;
             margin-top: 20px;
             position: relative;
-            top: -100px; /* Move it higher */
-            animation: popIn 0.6s ease-out; /* Fun popup animation */
+            top: -100px; 
+            animation: popIn 0.6s ease-out; 
         }
 
         .selected-info p {
@@ -202,7 +197,6 @@
             object-fit: cover;
         }
 
-        /* Return to Map Button */
         .return-btn {
             padding: 15px 30px;
             background-color: #28a745;
@@ -214,7 +208,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
             margin-top: 30px;
-            display: none; /* Initially hidden */
+            display: none; 
             animation: fadeInUp 1s ease-out;
         }
 
@@ -223,7 +217,6 @@
             transform: scale(1.05);
         }
 
-        /* Popup animation */
         @keyframes popIn {
             0% {
                 opacity: 0;
@@ -238,41 +231,33 @@
 </head>
 <body>
 
-    <!-- Header -->
     <div class="header">
         <h2>Pick a date and time for your ride</h2>
     </div>
 
-    <!-- Calendar and Time Picker Section -->
     <div class="calendar-container">
-        <!-- Calendar -->
         <div class="calendar">
             <label for="date-picker">Select Date:</label>
-            <div id="calendar"></div> <!-- Flatpickr Calendar -->
+            <div id="calendar"></div> 
         </div>
 
-        <!-- Time Picker -->
         <div class="time-picker-container">
             <label for="time-picker">Select Time:</label>
-            <input type="time" id="time-picker"> <!-- Time Picker for Hour and Minutes -->
+            <input type="time" id="time-picker"> 
         </div>
     </div>
 
-    <!-- Confirm Button -->
     <div class="calendar-container">
         <button class="confirm-btn" id="confirm-btn">Confirm Time & Date</button>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
         <p>&copy; 2025 Ride App | <a href="#">Return to Home</a></p>
     </div>
 
-    <!-- Selected Information Section -->
     <div class="selected-info hidden" id="selected-info">
         <h3>Your Ride Details</h3>
         
-        <!-- Driver's Avatar -->
         <img src="assets/f.jpg" alt="Driver Avatar" class="avatar">
         
         <p><strong>Date:</strong> <span id="selected-date"></span></p>
@@ -281,20 +266,16 @@
         <p><strong>Driver Name:</strong> Sabina Comandașu</p>
         <p><strong>Driver Rating:</strong> 4.8</p>
         
-        <!-- Car Image -->
         <img src="assets/hyundai.png" alt="Car Image" class="car-image">
         
         <p><strong>Car:</strong> Hyundai i20</p>
         <p><strong>Car Number Plate:</strong> DJ 12 SBN</p>
         
-        <!-- Return to Map Button -->
         <button class="return-btn" id="return-btn" onclick="window.location.href='index.html';">Return to Map</button>
     </div>
 
-    <!-- Flatpickr Script -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        // Retrieve lat and lon from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const lat = parseFloat(urlParams.get('lat'));
         const lon = parseFloat(urlParams.get('lon'));
@@ -302,7 +283,6 @@
         if (isNaN(lat) || isNaN(lon)) {
             alert('Invalid coordinates');
         } else {
-            // Reverse geocoding to get address
             fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
                 .then(response => response.json())
                 .then(data => {
@@ -313,41 +293,32 @@
                     }
                 });
 
-            // Initialize Flatpickr for the date
             const calendar = flatpickr("#calendar", {
-                dateFormat: "Y-m-d",  // Date format
-                minDate: "today",     // Prevent past date selection
-                inline: true,         // Display the calendar inline
+                dateFormat: "Y-m-d", 
+                minDate: "today",     
+                inline: true,         
             });
 
-            // Add event listener for the Confirm button
             document.getElementById('confirm-btn').addEventListener('click', function() {
-                // Get the selected date from Flatpickr
-                const selectedDate = calendar.selectedDates[0]; // Retrieve the selected date
+                const selectedDate = calendar.selectedDates[0]; 
                 const selectedTime = document.getElementById('time-picker').value;
 
-                // Check if the user has selected both date and time
                 if (!selectedDate || !selectedTime) {
                     alert('Please select both a date and a time!');
                     return;
                 }
 
-                // Format the date
-                const formattedDate = selectedDate.toISOString().split('T')[0]; // Format the date as YYYY-MM-DD
+                const formattedDate = selectedDate.toISOString().split('T')[0]; 
 
-                // Hide the calendar, time picker, and button
                 document.querySelector('.calendar').classList.add('hidden');
                 document.querySelector('.time-picker-container').classList.add('hidden');
                 document.getElementById('confirm-btn').classList.add('hidden');
 
-                // Display selected information
                 document.getElementById('selected-date').textContent = formattedDate;
                 document.getElementById('selected-time').textContent = selectedTime;
 
-                // Show the selected information panel with popup animation
                 document.getElementById('selected-info').classList.remove('hidden');
 
-                // Show the Return to Map button
                 document.getElementById('return-btn').style.display = 'block';
             });
         }
