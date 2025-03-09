@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <title>Ride Details</title>
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #e0f7fa; /* Light turquoise background */
+            overflow-x: hidden;
+        }
+
+        /* Container Styling */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+            border-left: 10px solid #00bcd4; /* Main accent color */
+        }
+
+        /* Header Styling */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: slideIn 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #00bcd4; /* Main color */
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Driver Info Section */
+        .driver-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .driver-info img {
+            border-radius: 8px;
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            transform: translateX(-50px);
+            opacity: 0;
+            animation: slideInImage 1s forwards;
+            border: 3px solid #00bcd4; /* Accent border for the car image */
+        }
+
+        .driver-details {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+
+        .driver-details h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .driver-details p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Address Section */
+        .address, .car-details, .ride-info, .rating-section {
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .address p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #00bcd4; /* Accent color for address */
+        }
+
+        .car-details p, .ride-info p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .car-details p {
+            color: #009688; /* A secondary color */
+        }
+
+        .ride-info p {
+            color: #777; /* A lighter color */
+        }
+
+        /* Rating Section */
+        .rating-section {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .rating-section h3 {
+            font-size: 20px;
+            color: #00bcd4;
+            margin-bottom: 15px;
+        }
+
+        .rating-section a {
+            display: inline-block;
+            background-color: #00bcd4;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .rating-section a:hover {
+            background-color: #009688;
+        }
+
+        /* Animation Definitions */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInImage {
+            0% {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Button Styles */
+        .btn {
+            background-color: #00bcd4;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #009688; /* Darker teal when hovering */
+        }
+
+        /* Footer Section */
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #00bcd4; /* Match footer with main color */
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Your Ride is On Its Way!</h1>
+        </div>
+
+        <div class="driver-info">
+            <img src="assets/hyundai.png" alt="Driver's Car">
+            <div class="driver-details">
+                <h3>Driver: Sabina Comandașu</h3>
+                <p><strong>Car:</strong> Hyundai i20 Turquiose</p>
+                <p><strong>Plate:</strong> DJ 12 SBN</p>
+                <p><strong>Rating:</strong> 4.8</p>
+            </div>
+        </div>
+
+        <div class="address">
+            <p><strong>Pickup Address:</strong> <span id="address"></span></p>
+        </div>
+
+        <div class="car-details">
+            <p><strong>Car Type:</strong> Supermini Hatchback</p>
+            <p><strong>Estimated Arrival:</strong> <span id="arrivalTime"></span> minutes</p>
+        </div>
+
+        <div class="ride-info">
+            <p>Your driver is on the way to your selected pickup location. You'll be picked up shortly!</p>
+        </div>
+
+        <!-- Button to go back to map -->
+        <div style="text-align: center;">
+            <a href="index.html" class="btn">Go back to map</a>
+        </div>
+
+        <!-- Rating Section -->
+        <div class="rating-section">
+            <h3>Finished your ride? Rate your driver!</h3>
+            <a href="rate-driver.html" class="btn">Rate your driver</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 CraiovaRide. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const lat = parseFloat(urlParams.get('lat'));
+        const lon = parseFloat(urlParams.get('lon'));
+        const address = decodeURIComponent(urlParams.get('address'));
+        const arrivalTime = Math.floor(Math.random() * 7) + 1; // Random number between 1 and 7
+
+        document.getElementById('address').textContent = address;
+        document.getElementById('arrivalTime').textContent = arrivalTime;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <title>Rate Your Driver</title>
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #daf6f7;
+        }
+
+        /* Container Styling */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+            border-top: 10px solid #00bcd4; /* Accent color for the top border */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #00bcd4;
+            font-weight: bold;
+        }
+
+        .rating-criteria {
+    margin-bottom: 35px;
+    padding: 25px 0px 0px 35px; /* Increased padding-top to push content down */
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.rating-criteria h3 {
+    font-size: 20px;
+    color: #00bcd4;
+    line-height: 1.4; /* Adjust line-height to give extra space */
+}
+
+
+        .rating-stars {
+            display: flex;
+            justify-content: space-around;
+            position: relative;
+        }
+
+        /* Positioning the numbers on top of each star */
+        .rating-stars label {
+            position: relative;
+            font-size: 30px;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .rating-stars label::before {
+            content: attr(data-number);
+            position: absolute;
+            top: -25px; /* Space above the stars */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            color: #00bcd4;
+        }
+
+        .rating-stars input {
+            display: none;
+        }
+
+        .rating-stars input:checked ~ label {
+            color: #ffcc00;
+        }
+
+        .rating-stars label:hover,
+        .rating-stars label:hover ~ label {
+            color: #ffcc00;
+        }
+
+        .rating-stars label:active {
+            transform: scale(0.9);
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #00bcd4;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #009688;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 16px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        /* Popup Styling */
+        /* Popup Styling */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #00bcd4;
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: bubble 0.6s ease-out; /* Apply bubble animation */
+}
+
+/* Bubbly Animation */
+@keyframes bubble {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    60% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+
+        /* Animation Definitions */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Rate Your Driver</h1>
+        </div>
+
+        <!-- Rating Criteria 1 -->
+        <div class="rating-criteria">
+            <h3>1. Driver's punctuality:</h3>
+            <div class="rating-stars">
+                <input type="radio" id="punctuality5" name="punctuality" value="5"><label for="punctuality5" data-number="5">★</label>
+                <input type="radio" id="punctuality4" name="punctuality" value="4"><label for="punctuality4" data-number="4">★</label>
+                <input type="radio" id="punctuality3" name="punctuality" value="3"><label for="punctuality3" data-number="3">★</label>
+                <input type="radio" id="punctuality2" name="punctuality" value="2"><label for="punctuality2" data-number="2">★</label>
+                <input type="radio" id="punctuality1" name="punctuality" value="1"><label for="punctuality1" data-number="1">★</label>
+            </div>
+        </div>
+
+        <!-- Rating Criteria 2 -->
+        <div class="rating-criteria">
+            <h3>2. Driver's driving skills:</h3>
+            <div class="rating-stars">
+                <input type="radio" id="skills5" name="skills" value="5"><label for="skills5" data-number="5">★</label>
+                <input type="radio" id="skills4" name="skills" value="4"><label for="skills4" data-number="4">★</label>
+                <input type="radio" id="skills3" name="skills" value="3"><label for="skills3" data-number="3">★</label>
+                <input type="radio" id="skills2" name="skills" value="2"><label for="skills2" data-number="2">★</label>
+                <input type="radio" id="skills1" name="skills" value="1"><label for="skills1" data-number="1">★</label>
+            </div>
+        </div>
+
+        <!-- Rating Criteria 3 -->
+        <div class="rating-criteria">
+            <h3>3. Friendliness of the driver:</h3>
+            <div class="rating-stars">
+                <input type="radio" id="friendliness5" name="friendliness" value="5"><label for="friendliness5" data-number="5">★</label>
+                <input type="radio" id="friendliness4" name="friendliness" value="4"><label for="friendliness4" data-number="4">★</label>
+                <input type="radio" id="friendliness3" name="friendliness" value="3"><label for="friendliness3" data-number="3">★</label>
+                <input type="radio" id="friendliness2" name="friendliness" value="2"><label for="friendliness2" data-number="2">★</label>
+                <input type="radio" id="friendliness1" name="friendliness" value="1"><label for="friendliness1" data-number="1">★</label>
+            </div>
+        </div>
+
+        <!-- Rating Criteria 4 -->
+        <div class="rating-criteria">
+            <h3>4. Vehicle cleanliness:</h3>
+            <div class="rating-stars">
+                <input type="radio" id="cleanliness5" name="cleanliness" value="5"><label for="cleanliness5" data-number="5">★</label>
+                <input type="radio" id="cleanliness4" name="cleanliness" value="4"><label for="cleanliness4" data-number="4">★</label>
+                <input type="radio" id="cleanliness3" name="cleanliness" value="3"><label for="cleanliness3" data-number="3">★</label>
+                <input type="radio" id="cleanliness2" name="cleanliness" value="2"><label for="cleanliness2" data-number="2">★</label>
+                <input type="radio" id="cleanliness1" name="cleanliness" value="1"><label for="cleanliness1" data-number="1">★</label>
+            </div>
+        </div>
+
+        <!-- Rating Criteria 5 -->
+        <div class="rating-criteria">
+            <h3>5. Comfort of the ride:</h3>
+            <div class="rating-stars">
+                <input type="radio" id="comfort5" name="comfort" value="5"><label for="comfort5" data-number="5">★</label>
+                <input type="radio" id="comfort4" name="comfort" value="4"><label for="comfort4" data-number="4">★</label>
+                <input type="radio" id="comfort3" name="comfort" value="3"><label for="comfort3" data-number="3">★</label>
+                <input type="radio" id="comfort2" name="comfort" value="2"><label for="comfort2" data-number="2">★</label>
+                <input type="radio" id="comfort1" name="comfort" value="1"><label for="comfort1" data-number="1">★</label>
+            </div>
+        </div>
+
+        <!-- Rating Criteria 6 -->
+        <div class="rating-criteria">
+            <h3>6. Driver's knowledge of the route:</h3>
+            <div class="rating-stars">
+                <input type="radio" id="route5" name="route" value="5"><label for="route5" data-number="5">★</label>
+                <input type="radio" id="route4" name="route" value="4"><label for="route4" data-number="4">★</label>
+                <input type="radio" id="route3" name="route" value="3"><label for="route3" data-number="3">★</label>
+                <input type="radio" id="route2" name="route" value="2"><label for="route2" data-number="2">★</label>
+                <input type="radio" id="route1" name="route" value="1"><label for="route1" data-number="1">★</label>
+            </div>
+        </div>
+
+        <!-- Rating Criteria 7 -->
+        <div class="rating-criteria">
+            <h3>7. Safety precautions:</h3>
+            <div class="rating-stars">
+                <input type="radio" id="safety5" name="safety" value="5"><label for="safety5" data-number="5">★</label>
+                <input type="radio" id="safety4" name="safety" value="4"><label for="safety4" data-number="4">★</label>
+                <input type="radio" id="safety3" name="safety" value="3"><label for="safety3" data-number="3">★</label>
+                <input type="radio" id="safety2" name="safety" value="2"><label for="safety2" data-number="2">★</label>
+                <input type="radio" id="safety1" name="safety" value="1"><label for="safety1" data-number="1">★</label>
+            </div>
+        </div>
+
+        <!-- Rating Criteria 8 -->
+        <div class="rating-criteria">
+            <h3>8. Overall satisfaction:</h3>
+            <div class="rating-stars">
+                <input type="radio" id="satisfaction5" name="satisfaction" value="5"><label for="satisfaction5" data-number="5">★</label>
+                <input type="radio" id="satisfaction4" name="satisfaction" value="4"><label for="satisfaction4" data-number="4">★</label>
+                <input type="radio" id="satisfaction3" name="satisfaction" value="3"><label for="satisfaction3" data-number="3">★</label>
+                <input type="radio" id="satisfaction2" name="satisfaction" value="2"><label for="satisfaction2" data-number="2">★</label>
+                <input type="radio" id="satisfaction1" name="satisfaction" value="1"><label for="satisfaction1" data-number="1">★</label>
+            </div>
+        </div>
+
+        <!-- Error message -->
+        <div id="error-message" class="error-message">
+            Please complete all rating fields before submitting.
+        </div>
+
+        <!-- Submit Button -->
+        <button id="submit-btn" class="submit-btn" onclick="validateAndSubmit()">Submit Rating</button>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup" class="popup">
+        <p>Thank you for your time!</p>
+    </div>
+
+    <script>
+        // Function to validate if all fields are filled
+        function validateAndSubmit() {
+            const allCompleted = checkAllFieldsCompleted();
+            if (allCompleted) {
+                showPopup(); // Show popup and redirect
+            } else {
+                document.getElementById('error-message').style.display = 'block'; // Show error message
+            }
+        }
+
+        // Check if all rating fields are filled
+        function checkAllFieldsCompleted() {
+            let fields = document.querySelectorAll('input[type="radio"]:checked');
+            const requiredFields = document.querySelectorAll('input[type="radio"]');
+            return fields.length === requiredFields.length / 5; // We expect 5 fields per rating section
+        }
+
+        // Show popup message and redirect
+        function showPopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'block';
+            popup.style.opacity = 1;
+            setTimeout(function() {
+                window.location.href = 'index.html'; // Redirect after 2 seconds
+            }, 2000);
+        }
+
+        // Event listener to hide the error message once the user selects a radio button
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (checkAllFieldsCompleted()) {
+                    document.getElementById('error-message').style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

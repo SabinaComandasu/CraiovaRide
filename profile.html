@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1s ease-out;
+        }
+
+        .profile-header .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-header .left img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+        }
+
+        .profile-header .left h2 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .profile-header .left p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-header .left p .rating {
+            margin-right: 5px; /* Space between the rating number and the star */
+        }
+
+        .profile-header .left p .star {
+            color: #FFD700; /* Gold color for the star */
+            font-size: 16px; /* Size of the star */
+        }
+
+        .profile-header .right button {
+            padding: 10px 15px;
+            background-color: #4aa8ba;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .profile-header .right button:hover {
+            transform: scale(1.05);
+            background-color: #80e8e5;
+        }
+
+        /* Section Titles */
+        .section-title {
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Section Containers */
+        .section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Section Items */
+        .section .item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #333;
+            flex-direction: column;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .section .item span {
+            font-weight: bold;
+        }
+
+        .section .item .value {
+            font-weight: normal;
+            margin-bottom: 10px;
+        }
+
+        /* Modern Edit Button */
+        .edit-btn {
+            background-color: #80e8e5;
+            color: white;
+            font-size: 14px;
+            padding: 5px 15px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            background-color: #4aa8ba;
+        }
+
+        .edit-btn:focus {
+            outline: none;
+        }
+
+        /* Icons */
+        .icon {
+            margin-right: 10px;
+            font-size: 18px;
+            color: #4aa8ba;
+        }
+
+        /* Navbar */
+        .nav-bar {
+            display: flex;
+            justify-content: space-around;
+            background: #333;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        /* "Return to Map" Button */
+        .return-to-map-btn {
+            background-color: #4aa8ba;
+            color: white;
+            font-size: 14px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .return-to-map-btn:hover {
+            background-color: #80e8e5;
+        }
+
+        .return-to-map-btn:focus {
+            outline: none;
+        }
+
+        /* Update for Log Out button */
+        .edit-btn.logout-btn {
+            background-color: #4DB6AC; /* Updated color */
+            color: white;
+            font-size: 14px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .edit-btn.logout-btn:hover {
+            background-color: #80e8e5; /* Lighter color on hover */
+        }
+
+        .edit-btn.logout-btn:focus {
+            outline: none;
+        }
+
+        /* Update for Delete Account button */
+        .delete-account-btn {
+            background-color: #E57373; /* Color change */
+            color: white;
+            font-size: 14px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .delete-account-btn:hover {
+            background-color: #EF9A9A; /* Lighter color on hover */
+        }
+
+        .delete-account-btn:focus {
+            outline: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="left">
+                <img src="assets/f.jpg" alt="Avatar">
+                <div>
+                    <h2>Sabina C</h2>
+                    <p><span class="rating">User Rating: 4.8</span><i class="fas fa-star star"></i></p>
+                </div>
+            </div>
+            <div class="right">
+                <button>Change Avatar</button>
+            </div>
+        </div>
+
+        <!-- Personal Info Section -->
+        <div class="section">
+            <div class="section-title"><i class="fas fa-user icon"></i>Personal Info</div>
+            <div class="item">
+                <span>Name</span>
+                <div class="value">Sabina Comandașu</div>
+                <button class="edit-btn">Edit</button>
+            </div>
+            <div class="item">
+                <span>Phone</span>
+                <div class="value">+40770378602</div>
+                <button class="edit-btn">Edit</button>
+            </div>
+            <div class="item">
+                <span>Email</span>
+                <div class="value">comandasu.sabina.x9g@student.ucv.ro</div>
+                <button class="edit-btn">Edit</button>
+            </div>
+        </div>
+
+        <!-- Trip Safety Section -->
+        <div class="section">
+            <div class="section-title"><i class="fas fa-shield-alt icon"></i>Trip Safety</div>
+            <div class="item">
+                <span>Pick-up Code</span>
+                <div class="value">12345</div>
+            </div>
+            <div class="item">
+                <span>Trusted Contacts</span>
+                <div class="value">Flavius Miu - +40758372185</div>
+                <button class="edit-btn">Edit</button>
+            </div>
+        </div>
+
+        <!-- Saved Places Section -->
+        <div class="section">
+            <div class="section-title"><i class="fas fa-map-marker-alt icon"></i>Saved Places</div>
+            <div class="item">
+                <span>Home Address</span>
+                <div class="value">Fratii Golesti nr. 53</div>
+                <button class="edit-btn">Edit</button>
+            </div>
+            <div class="item">
+                <span>Work Address</span>
+                <div class="value">Bulevardul Decebal 107</div>
+                <button class="edit-btn">Edit</button>
+            </div>
+        </div>
+
+        <!-- Log Out and Delete Account -->
+        <div class="section">
+            <div class="section-title"><i class="fas fa-lock icon"></i>Account Actions</div>
+            <div class="item">
+                <button class="edit-btn logout-btn">Log Out</button> <!-- Updated button class -->
+            </div>
+            <div class="item">
+                <button class="delete-account-btn">Delete Account</button>
+            </div>
+        </div>
+
+        <!-- Return to Map Button -->
+        <button class="return-to-map-btn" onclick="window.location.href='index.html'">Return to Map</button>
+    </div>
+
+    <!-- Bottom Navbar -->
+    <div class="nav-bar">
+        <a href="startpage.html">Home</a>
+        <a href="rides.html">Rides</a>
+        <a href="profile.html">Account</a>
+    </div>
+
+</body>
+</html>

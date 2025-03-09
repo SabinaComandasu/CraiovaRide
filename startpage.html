@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolt-Like Website</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 20px;
+            background-color: #4AA8BA;
+            color: white;
+            animation: slideInDown 1s ease-in-out;
+            border-bottom: 7px solid #E0F7FA;
+        }
+
+        header .logo img {
+            height: 70px;
+            display: block;
+            margin: 0;
+            margin-top: 10px;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 20px;
+        }
+
+        /* Navigation Link Styles */
+        header nav ul li a {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out; /* Transition for resizing and color change */
+        }
+
+        /* Hover Effect for Navigation Links */
+        header nav ul li a:hover {
+            background-color: #e0f7fa; /* Lighter cyan background */
+            color: #4AA8BA; /* Change text color to the original cyan */
+            transform: scale(1.1); /* Grow slightly */
+        }
+
+        /* Active (Click) Effect for Navigation Links */
+        header nav ul li a:active {
+            transform: scale(0.95); /* Shrink slightly when clicked */
+            background-color: #4AA8BA; /* Darker cyan background */
+            color: white; /* Change text to white */
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url('assets/car.png');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 40px;
+            text-align: center;
+            position: relative;
+            height: 500px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(74, 168, 186, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* CTA Button */
+        .cta-btn {
+            background-color: #ffffff;
+            color: #4AA8BA;
+            padding: 12px 40px;
+            font-size: 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+            animation: bounceIn 2s ease-in-out;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            background-color: #e0f7fa;
+            transform: scale(1.1);
+        }
+
+        .cta-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 60px 40px;
+            background-color: #f5f5f5;
+            animation: fadeInUp 2s ease-in-out;
+        }
+
+        .feature {
+            text-align: center;
+            width: 30%;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease-in-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .feature:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .feature:nth-child(3) {
+            animation-delay: 1.5s;
+        }
+
+        .feature h3 {
+            font-size: 24px;
+            color: #4AA8BA;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        /* Keyframes for animations */
+        @keyframes slideInDown {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="assets/logowriting.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Fast & Affordable Rides, Just a Tap Away</h2>
+            <p>Get where you need to go quickly and safely with CraiovaRide.</p>
+            <a href="index.html" class="cta-btn">Try for free</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature">
+            <h3>Affordable</h3>
+            <p>Get to your destination without breaking the bank.</p>
+        </div>
+        <div class="feature">
+            <h3>Safe</h3>
+            <p>Your safety is our priority with every ride.</p>
+        </div>
+        <div class="feature">
+            <h3>Fast</h3>
+            <p>Experience rides that are quick and reliable.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 CraiovaRide. All rights reserved.</p>
+    </footer>
+</body>
+</html>

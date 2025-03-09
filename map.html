@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <title>Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            height: 100vh;
+        }
+        .popup-content {
+            text-align: center;
+            min-width: 300px;
+            max-height: 120px; /* Increased height to handle more content */
+            padding: 5px 10px;
+            overflow-y: auto; /* Allow scrolling for long addresses */
+        }
+        .popup-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+        .popup-btn {
+            padding: 6px 10px;
+            background-color: #007bff;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .popup-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .modal button {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .modal button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <div id="rideModal" class="modal">
+        <p>Ride confirmed!</p>
+        <button id="showRideDetailsBtn">Show Ride Details</button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var lat = parseFloat(urlParams.get('lat'));
+        var lon = parseFloat(urlParams.get('lon'));
+
+        if (isNaN(lat) || isNaN(lon)) {
+            alert("Invalid coordinates");
+        } else {
+            var map = L.map('map').setView([lat, lon], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            var marker = L.marker([lat, lon]).addTo(map);
+
+            // Reverse geocoding using OpenStreetMap's Nominatim API
+            var address = "Unknown Address";
+            fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.display_name) {
+                        address = data.display_name;
+                    }
+
+                    // Truncate address if it is too long
+                    if (address.length > 100) {
+                        address = address.substring(0, 100) + '...'; // Truncate to 100 characters
+                    }
+
+                    var popupContent = `
+                        <div class="popup-content">
+                            <p><strong>Selected Location: ${address}</strong></p>
+                            <div class="popup-buttons">
+                                <a href="#" class="popup-btn" onclick="confirmRide(marker, '${address}')">Confirm Ride</a>
+                                <a href="schedule.html?lat=${lat}&lon=${lon}" class="popup-btn">Schedule</a>
+                                <a href="index.html" class="popup-btn">Choose Another Address</a>
+                            </div>
+                        </div>
+                    `;
+
+                    marker.bindPopup(popupContent, { maxWidth: 380 }).openPopup();
+                });
+        }
+
+        function confirmRide(marker, address) {
+            marker.closePopup();
+            document.getElementById("rideModal").style.display = "block";
+
+            // Pass the address, lat, and lon to the ride details page
+            document.getElementById("showRideDetailsBtn").onclick = function () {
+                window.location.href = `rideDetails.html?lat=${lat}&lon=${lon}&address=${encodeURIComponent(address)}`;
+            };
+        }
+    </script>
+</body>
+</html>

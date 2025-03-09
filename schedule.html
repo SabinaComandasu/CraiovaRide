@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule a Ride</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <style>
+        /* Global Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background-image: url('assets/uni.jpg'); 
+            background-size: cover; /* Make sure the background image covers the entire screen */
+    background-position: center; /* Center the background image */
+    background-attachment: fixed;
+        }
+
+        /* Header */
+        .header {
+            padding: 30px;
+            background-color: #4aa8ba; /* Light Blue Color */
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .header h2 {
+            margin: 0;
+        }
+
+        /* Calendar Container */
+        .calendar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 20px;
+            animation: fadeInUp 1s ease-out;
+            gap: 20px; /* Add space between calendar and clock */
+        }
+
+        .calendar {
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: zoomIn 1s ease-out;
+        }
+
+        /* Time Picker Container */
+        .time-picker-container {
+            width: 250px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: zoomIn 1s ease-out;
+        }
+
+        .time-picker-container input {
+            padding: 12px;
+            border: 2px solid #4aa8ba;
+            border-radius: 10px;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 15px;
+            text-align: center;
+            transition: border-color 0.3s ease;
+            margin-left: -10px;
+        }
+
+        .time-picker-container input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        /* Confirm Button */
+        .confirm-btn {
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .confirm-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 12px;
+            color: white;
+            text-align: center;
+            animation: slideUp 1s ease-out;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hidden content */
+        .hidden {
+            display: none;
+        }
+
+        /* Display selected information */
+        .selected-info {
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 20px;
+            position: relative;
+            top: -100px; /* Move it higher */
+            animation: popIn 0.6s ease-out; /* Fun popup animation */
+        }
+
+        .selected-info p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .selected-info .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-top: 10px;
+            object-fit: cover;
+        }
+
+        .selected-info .car-image {
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+            object-fit: cover;
+        }
+
+        /* Return to Map Button */
+        .return-btn {
+            padding: 15px 30px;
+            background-color: #28a745;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 30px;
+            display: none; /* Initially hidden */
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .return-btn:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        /* Popup animation */
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h2>Pick a date and time for your ride</h2>
+    </div>
+
+    <!-- Calendar and Time Picker Section -->
+    <div class="calendar-container">
+        <!-- Calendar -->
+        <div class="calendar">
+            <label for="date-picker">Select Date:</label>
+            <div id="calendar"></div> <!-- Flatpickr Calendar -->
+        </div>
+
+        <!-- Time Picker -->
+        <div class="time-picker-container">
+            <label for="time-picker">Select Time:</label>
+            <input type="time" id="time-picker"> <!-- Time Picker for Hour and Minutes -->
+        </div>
+    </div>
+
+    <!-- Confirm Button -->
+    <div class="calendar-container">
+        <button class="confirm-btn" id="confirm-btn">Confirm Time & Date</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Ride App | <a href="#">Return to Home</a></p>
+    </div>
+
+    <!-- Selected Information Section -->
+    <div class="selected-info hidden" id="selected-info">
+        <h3>Your Ride Details</h3>
+        
+        <!-- Driver's Avatar -->
+        <img src="assets/f.jpg" alt="Driver Avatar" class="avatar">
+        
+        <p><strong>Date:</strong> <span id="selected-date"></span></p>
+        <p><strong>Time:</strong> <span id="selected-time"></span></p>
+        <p><strong>Address:</strong> <span id="selected-address"></span></p>
+        <p><strong>Driver Name:</strong> Sabina Comandașu</p>
+        <p><strong>Driver Rating:</strong> 4.8</p>
+        
+        <!-- Car Image -->
+        <img src="assets/hyundai.png" alt="Car Image" class="car-image">
+        
+        <p><strong>Car:</strong> Hyundai i20</p>
+        <p><strong>Car Number Plate:</strong> DJ 12 SBN</p>
+        
+        <!-- Return to Map Button -->
+        <button class="return-btn" id="return-btn" onclick="window.location.href='index.html';">Return to Map</button>
+    </div>
+
+    <!-- Flatpickr Script -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // Retrieve lat and lon from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const lat = parseFloat(urlParams.get('lat'));
+        const lon = parseFloat(urlParams.get('lon'));
+
+        if (isNaN(lat) || isNaN(lon)) {
+            alert('Invalid coordinates');
+        } else {
+            // Reverse geocoding to get address
+            fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.display_name) {
+                        document.getElementById('selected-address').textContent = data.display_name;
+                    } else {
+                        document.getElementById('selected-address').textContent = 'Address not found';
+                    }
+                });
+
+            // Initialize Flatpickr for the date
+            const calendar = flatpickr("#calendar", {
+                dateFormat: "Y-m-d",  // Date format
+                minDate: "today",     // Prevent past date selection
+                inline: true,         // Display the calendar inline
+            });
+
+            // Add event listener for the Confirm button
+            document.getElementById('confirm-btn').addEventListener('click', function() {
+                // Get the selected date from Flatpickr
+                const selectedDate = calendar.selectedDates[0]; // Retrieve the selected date
+                const selectedTime = document.getElementById('time-picker').value;
+
+                // Check if the user has selected both date and time
+                if (!selectedDate || !selectedTime) {
+                    alert('Please select both a date and a time!');
+                    return;
+                }
+
+                // Format the date
+                const formattedDate = selectedDate.toISOString().split('T')[0]; // Format the date as YYYY-MM-DD
+
+                // Hide the calendar, time picker, and button
+                document.querySelector('.calendar').classList.add('hidden');
+                document.querySelector('.time-picker-container').classList.add('hidden');
+                document.getElementById('confirm-btn').classList.add('hidden');
+
+                // Display selected information
+                document.getElementById('selected-date').textContent = formattedDate;
+                document.getElementById('selected-time').textContent = selectedTime;
+
+                // Show the selected information panel with popup animation
+                document.getElementById('selected-info').classList.remove('hidden');
+
+                // Show the Return to Map button
+                document.getElementById('return-btn').style.display = 'block';
+            });
+        }
+    </script>
+
+</body>
+</html>
